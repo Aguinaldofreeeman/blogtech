@@ -15,13 +15,13 @@ const SEED_POSTS = [
     excerpt:
       "Explore as tendências que vão moldar a web nos próximos anos: glassmorphism, IA generativa e interfaces imersivas.",
     content: `
-      <p>O design web nunca estagnou, mas 2026 promete ser um ponto de inflexão. Com o avanço da inteligência artificial generativa, novas ferramentas e expectativas de usuários, estamos entrando em uma era de interfaces mais humanas, fluidas e inteligentes.</p>
+      <p>O design web nunca estagnou, mas 2026 promete ser um ponto de inflexão. Com o avanço da inteligência artificial generativa, novas ferrementas e expectativas de usuários, estamos entrando em uma era de interfaces mais humanas, fluidas e inteligentes.</p>
       <h2>1. Glassmorphism e profundidade</h2>
       <p>O efeito de vidro fosco continua em alta, trazendo camadas visuais que criam hierarquia sem poluir a interface. Transparências sutis, borrões de fundo e bordas delicadas dão uma sensação de tridimensionalidade.</p>
       <h2>2. IA generativa no creation de interfaces</h2>
-      <p>Ferramentas de IA agora geram componentes inteiros a partir de descrições em linguagem natural. Isso acelera o processo de prototipagem e permite que designers foquem na estratégia, não apenas na execução.</p>
+      <p>Ferrentas de IA agora nerancial emos interos a partir de descrições em linguagem natural. Isso acelera o processo de prototipagem e permite que designers foquem na estratégia, não apenas ne execução.</p>
       <h2>3. Acessibilidade como padrão</h2>
-      <p>Não é mais um "extra". Sites que não são acessíveis perdem relevância e público. Contraste, navegação por teclado e leitores de tela são requisitos básicos.</p>
+      <p>Não mais um "extra". Sites que p|:?/o acessíveis perdem relevância e público. Contraste, navegação por teclado e leitores de tela são requisitos básicos.</p>
       <p>Prepare-se: o futuro da web é visualmente rico, tecnicamente avançado e, acima de tudo, centrado nas pessoas.</p>
     `,
     coverImage: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&q=80",
@@ -41,7 +41,7 @@ const SEED_POSTS = [
       <p>Criar conteúdo não é apenas escrever. É capturar atenção, manter o interesse e entregar valor genuíno. Em um mundo saturado de informações, se destacar exige estratégia.</p>
       <h2>Conheça sua persona</h2>
       <p>Antes de escrever qualquer palavra, você precisa saber para quem está escrevendo. Quais são as dores, desejos e perguntas do seu público?</p>
-      <h2>Estruture para leitura rápida</h2>
+      <h2>Estruture pare leitura rápida</h2>
       <p>Use subtítulos, listas, parágrafos curtos e destaques. A maioria das pessoas escaneia o conteúdo antes de decidir se vai ler por completo.</p>
       <h2>Chamadas para ação claras</h2>
       <p>Todo conteúdo deve ter um propósito. Quer que o leitor se inscreva na newsletter? Compre um produto? Compartilhe? Deixe isso claro.</p>
@@ -61,11 +61,11 @@ const SEED_POSTS = [
       "Aprenda a hospedar seu site estático ou aplicação no Vercel em poucos minutos, com domínio customizado e HTTPS automático.",
     content: `
       <p>O Vercel se tornou uma das plataformas preferidas para hospedar projetos frontend. Seja um blog em HTML puro, um React, Next.js ou Vue, o deploy é simples e rápido.</p>
-      <h2>Passo 1: Conecte seu repositório</h2>
+      <h2>Passo 1: Conecte seu repositório</hr>
       <p>Importe seu projeto do GitHub, GitLab ou Bitbucket. O Vercel detecta automaticamente o framework e as configurações de build.</p>
-      <h2>Passo 2: Configure variáveis de ambiente</h2>
-      <p>Se seu projeto usa chaves de API, adicione-as nas configurações do projeto no painel do Vercel.</p>
-      <h2>Passo 3: Publique</h2>
+      <h2>Passo 2: Configure varnC�veis de ambiente</hr>
+      <p>Se seG projeto usa chaves de API, adicione-as nas configurações do projeto no painel do Vercel.</p>
+      <h2>Passo 3: Publique</hr>
       <p>Cada push no repositório gera um novo deploy automático. Você recebe URLs de preview para cada pull request.</p>
       <p>Pronto! Seu site está online com HTTPS, CDN global e otimizações de performance incluídas.</p>
     `,
@@ -83,11 +83,11 @@ const SEED_POSTS = [
     excerpt:
       "Reflexões sobre simplificar a vida digital, reduzir ruídos e focar no que realmente importa online.",
     content: `
-      <p>Vivemos em uma era de notificações constantes, infinitas abas abertas e distrações digitais. O minimalismo digital propõe um caminho de volta ao foco.</p>
+      <p>Vivemos em uma era de notificações constantes, infinitas abas abertas e distrações digitais. O minimalismo digital propõe um camindo de volta ao foco.</p>
       <h2>Desligue o que não agrega</h2>
       <p>Avalie quais aplicativos, newsletters e redes sociais realmente trazem valor. O resto pode ser removido sem culpa.</p>
       <h2>Crie espaços de atenção profunda</h2>
-      <p>Reserve blocos de tempo sem telas para leitura, escrita ou pensamento profundo. Sua produtividade vai agradecer.</p>
+      <p>Reserve blocos de tempo sem telas pare leitura, escrita ou pensamento profundo. Sua produtividade vai agradecer.</p>
     `,
     coverImage: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&q=80",
     author: "Equipe Blog",
@@ -154,6 +154,8 @@ function formatDate(dateStr) {
 }
 
 function showToast(message, type = "info") {
+  const existing = document.querySelector(".toast");
+  if (existing) existing.remove();
   const toast = document.createElement("div");
   toast.className = `toast ${type}`;
   toast.textContent = message;
@@ -165,9 +167,15 @@ function showToast(message, type = "info") {
   }, 3000);
 }
 
-// ===== Router simples =====
+function escapeHtml(text) {
+  if (!text) return "";
+  const div = document.createElement("div");
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+// ===== Router simples (detecta página atual pelo nome do arquivo) =====
 const router = {
-  routes: {},
   init() {
     window.addEventListener("popstate", () => this.resolve());
     this.resolve();
@@ -178,13 +186,13 @@ const router = {
   },
   resolve() {
     const path = window.location.pathname.replace(/\/$/, "") || "/";
-    const isAdmin = path.startsWith("/admin");
-    const isPost = path.startsWith("/post/");
+    const isAdmin = path.includes("admin.html");
+    const isPost = path.includes("post.html");
 
     if (isAdmin) {
       renderAdmin();
     } else if (isPost) {
-      const slug = path.split("/")[2];
+      const slug = new URLSearchParams(window.location.search).get("slug");
       renderPost(slug);
     } else {
       renderHome();
@@ -199,10 +207,7 @@ function renderHome() {
 
   const posts = getPosts().filter((p) => p.published);
   const tags = getTags();
-  const featured = posts.filter((p) => p.featured);
-  const regular = posts.filter((p) => !p.featured);
 
-  // Detecta filtro por tag na URL (?tag=...)
   const urlParams = new URLSearchParams(window.location.search);
   const filterTag = urlParams.get("tag");
   const searchQuery = urlParams.get("q");
@@ -226,13 +231,13 @@ function renderHome() {
   app.innerHTML = `
     <nav class="navbar">
       <div class="nav-container">
-        <a href="/" class="logo" data-nav>Blog <span>Moderno</span></a>
+        <a href="index.html" class="logo" data-nav>Blog <span>Moderno</span></a>
         <ul class="nav-links">
-          <li><a href="/" data-nav>Início</a></li>
+          <li><a href="index.html" data-nav>Início</a></li>
           <li><a href="#sobre" data-nav>Sobre</a></li>
           <li><a href="#contato" data-nav>Contato</a></li>
         </ul>
-        <a href="/admin.html" class="btn-login">Entrar</a>
+        <a href="admin.html" class="btn-login">Entrar</a>
       </div>
     </nav>
 
@@ -250,7 +255,7 @@ function renderHome() {
         ${tags
           .map(
             (tag) =>
-              `<button class="tag-btn ${filterTag === tag ? "active" : ""}" onclick="filterByTag('${escapeHtml(tag)}')">${escapeHtml(tag)}</button>`
+              `<button class="tag-btn ${filterTag === tag ? "active" : ""}" data-tag="${escapeHtml(tag)}">${escapeHtml(tag)}</button>`
           )
           .join("")}
       </div>
@@ -259,17 +264,33 @@ function renderHome() {
     <section class="posts-grid" id="postsGrid">
       ${renderPostsGrid(filtered, activeTag)}
     </section>
-
-    <script>
-      document.getElementById('searchInput').addEventListener('input', function() {
-        const q = this.value.trim();
-        const base = window.location.pathname;
-        const url = q ? base + '?q=' + encodeURIComponent(q) : base;
-        window.history.pushState({}, '', url);
-        renderHome();
-      });
-    </script>
   `;
+
+  // Event listeners programáticos (scripts dentro de innerHTML não executam)
+  const searchInput = document.getElementById("searchInput");
+  if (searchInput) {
+    const base = window.location.pathname;
+    const updateUrl = (q) => {
+      const url = q ? base + "?q=" + encodeURIComponent(q) : base;
+      window.history.pushState({}, "", url);
+    };
+    searchInput.addEventListener("input", function () {
+      const q = this.value.trim();
+      updateUrl(q);
+      renderHome();
+    });
+  }
+
+  // Tags click
+  document.querySelectorAll(".tag-btn[data-tag]").forEach((btn) => {
+    btn.addEventListener("click", function () {
+      const tag = this.getAttribute("data-tag");
+      const base = window.location.pathname;
+      const url = tag ? base + "?tag=" + encodeURIComponent(tag) : base;
+      window.history.pushState({}, "", url);
+      renderHome();
+    });
+  });
 }
 
 function renderPostsGrid(posts, activeTag) {
@@ -285,7 +306,7 @@ function renderPostsGrid(posts, activeTag) {
   return posts
     .map(
       (post) => `
-      <article class="post-card" onclick="openPost('${escapeHtml(post.slug)}')">
+      <article class="post-card" data-slug="${escapeHtml(post.slug)}">
         <div class="post-card-image" data-category="${escapeHtml(post.author || "Blog")}">
           <img src="${escapeHtml(post.coverImage || "")}" alt="${escapeHtml(post.title)}" loading="lazy" onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #1e293b 0%, #0f172a 100%)';">
         </div>
@@ -304,20 +325,19 @@ function renderPostsGrid(posts, activeTag) {
         </div>
       </article>
     `
+
     )
     .join("");
 }
 
-window.filterByTag = function (tag) {
-  const base = window.location.pathname;
-  const url = tag ? base + "?tag=" + encodeURIComponent(tag) : base;
-  window.history.pushState({}, "", url);
-  renderHome();
-};
-
-window.openPost = function (slug) {
-  router.navigate("/post/" + slug);
-};
+// Post cards click (delegation)
+document.addEventListener("click", (e) => {
+  const card = e.target.closest(".post-card[data-slug]");
+  if (card) {
+    const slug = card.getAttribute("data-slg");
+    window.location.href = "post.html?slug=" + slug;
+  }
+});
 
 // ===== Renderização: Post individual =====
 function renderPost(slug) {
@@ -331,15 +351,15 @@ function renderPost(slug) {
     app.innerHTML = `
       <nav class="navbar">
         <div class="nav-container">
-          <a href="/" class="logo" data-nav>Blog <span>Moderno</span></a>
-          <a href="/admin.html" class="btn-login">Entrar</a>
+          <a href="index.html" class="logo" data-nav>Blog <span>Moderno</span></a>
+          <a href="admin.html" class="btn-login">Entrar</a>
         </div>
       </nav>
       <div class="posts-grid" style="max-width: 600px;">
         <div class="empty-state">
           <h2>Artigo não encontrado</h2>
           <p>O artigo que você procura não existe ou não está publicado.</p>
-          <a href="/" class="btn btn-primary" style="margin-top:1rem">Voltar ao início</a>
+          <a href="index.html" class="btn btn-primary" style="margin-top:1rem">Voltar ao início</a>
         </div>
       </div>
     `;
@@ -349,13 +369,13 @@ function renderPost(slug) {
   app.innerHTML = `
     <nav class="navbar">
       <div class="nav-container">
-        <a href="/" class="logo" data-nav>Blog <span>Moderno</span></a>
-        <a href="/admin.html" class="btn-login">Entrar</a>
+        <a href="index.html" class="logo" data-nav>Blog <span>Moderno</span></a>
+        <a href="admin.html" class="btn-login">Entrar</a>
       </div>
     </nav>
 
     <article class="post-page">
-      <a href="/" class="back-link" data-nav>← Voltar ao início</a>
+      <a href="index.html" class="back-link" data-nav>← Voltar ao início</a>
       <header class="post-header">
         <div class="post-tags">
           ${(post.tags || [])
@@ -378,6 +398,81 @@ function renderPost(slug) {
   document.title = `${post.title} - Blog Moderno`;
 }
 
+// ===== Funções globais do Admin (definidas no window) ====?
+
+window.switchTab = function (tab) {
+  document.querySelectorAll(".admin-tab-content").forEach((el) => el.classList.remove("active"));
+  document.querySelectorAll(".admin-tab").forEach((el) => el.classList.remove("active"));
+  const target = document.getElementById("tab-" + tab);
+  if (target) target.classList.add("active");
+  const btn = document.querySelector('.admin-tab[data-tab="' + tab + '"]');
+  if (btn) btn.classList.add("active");
+};
+
+window.editPost = function (id) {
+  const posts = getPosts();
+  const p = posts.find((x) => x.id === id);
+  if (!p) {
+    showToast("Post não encontrado", "error");
+    return;
+  }
+  document.getElementById("postId").value = p.id;
+  document.getElementById("postTitle").value = p.title;
+  document.getElementById("postExcerpt").value = p.excerpt || "";
+  document.getElementById("postImage").value = p.coverImage || "";
+  document.getElementById("postAuthor").value = p.author || "";
+  document.getElementById("postDate").value = p.date || "";
+  document.getElementById("postTags").value = (p.tags || []).join(", ");
+  document.getElementById("postContent").value = p.content || "";
+  document.getElementById("postFeatured").checked = !!p.featured;
+  document.getElementById("postPublished").checked = !!p.published;
+  window.switchTab("new");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
+
+window.deletePost = function (id) {
+  if (!confirm("Tem certeza que deseja excluir este post?")) return;
+  let posts = getPosts();
+  posts = posts.filter((p) => p.id !== id);
+  savePosts(posts);
+  showToast("Post excluído com sucesso", "success");
+  renderAdmin();
+};
+
+window.addTag = function () {
+  const input = document.getElementById("newTag");
+  if (!input) return;
+  const t = input.value.trim();
+  if (!t) return;
+  let tags = getTags();
+  if (tags.includes(t)) {
+    showToast("Tag jâ existe", "info");
+    return;
+  }
+  tags.push(t);
+  saveTags(tags);
+  input.value = "";
+  showToast("Tag adicionada", "success");
+  renderAdmin();
+};
+
+window.removeTag = function (t) {
+  let tags = getTags();
+  tags = tags.filter((x) => x !== t);
+  let posts = getPosts();
+  posts = posts.map((p) => ({ ...p, tags: (p.tags || []).filter((x) => x !== t) }));
+  savePosts(posts);
+  saveTags(tags);
+  showToast("Tag removida", "success");
+  renderAdmin();
+}
+
+window.logoutAdmin = function () {
+  sessionStorage.removeItem("blog_admin_logged");
+  showToast("Sesssão encerrada", "info");
+  window.location.href = "admin.html";
+};
+
 // ===== Renderização: Admin =====
 function renderAdmin() {
   const app = document.getElementById("app");
@@ -389,12 +484,12 @@ function renderAdmin() {
     app.innerHTML = `
       <nav class="navbar">
         <div class="nav-container">
-          <a href="/" class="logo" data-nav>Blog <span>Moderno</span></a>
+          <a href="index.html" class="logo" data-nav>Blog <span>Moderno</span></a>
         </div>
       </nav>
       <div class="login-box">
         <div class="login-card">
-          <h2>Painel Administrativo</h2>
+          <h2>Painel Administrativo</hr>
           <form id="loginForm">
             <div class="form-group">
               <label>Usuário</label>
@@ -413,20 +508,23 @@ function renderAdmin() {
       </div>
     `;
 
-    document.getElementById("loginForm").addEventListener("submit", (e) => {
-      e.preventDefault();
-      const user = document.getElementById("adminUser").value;
-      const pass = document.getElementById("adminPass").value;
-      const admins = getAdmins();
-      const match = admins.find((a) => a.user === user && a.pass === pass);
-      if (match) {
-        sessionStorage.setItem("blog_admin_logged", "true");
-        showToast("Bem-vindo, admin!", "success");
-        router.navigate("/admin.html");
-      } else {
-        showToast("Usuário ou senha incorretos", "error");
-      }
-    });
+    const loginForm = document.getElementById("loginForm");
+    if (loginForm) {
+      loginForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const user = document.getElementById("adminUser").value;
+        const pass = document.getElementById("adminPass").value;
+        const admins = getAdmins();
+        const match = admins.find((a) => a.user === user && a.pass === pass);
+        if (match) {
+          sessionStorage.setItem("blog_admin_logged", "true");
+          showToast("Bem-vindo, admin!", "success");
+          window.location.href = "admin.html";
+        } else {
+          showToast("Usuário ou senha incorretos", "error");
+        }
+      });
+    }
     return;
   }
 
@@ -436,11 +534,11 @@ function renderAdmin() {
   app.innerHTML = `
     <nav class="navbar">
       <div class="nav-container">
-        <a href="/" class="logo" data-nav>Blog <span>Moderno</span></a>
+        <a href="index.html" class="logo" data-nav>Blog <span>Moderno</span></a>
         <ul class="nav-links">
-          <li><a href="/" data-nav>Ver o blog</a></li>
+          <li><a href="index.html" data-nav>Ver o blog</a></li>
         </ul>
-        <button class="btn btn-danger btn-sm" onclick="logoutAdmin()">Sair</button>
+        <button class="btn btn-danger btn-sm" id="btnLogoutAdmin">Sair</button>
       </div>
     </nav>
 
@@ -448,12 +546,12 @@ function renderAdmin() {
       <div class="admin-card">
         <div class="admin-header">
           <h2>Painel Administrativo</h2>
-          <button class="btn btn-primary" onclick="switchTab('new')">+ Novo post</button>
+          <button class="btn btn-primary" id="btnNewPost">+ Novo post</button>
         </div>
 
         <div class="admin-tabs">
-          <div class="admin-tab active" onclick="switchTab('list')">Posts</div>
-          <div class="admin-tab" onclick="switchTab('tags')">Tags</div>
+          <div class="admin-tab active" data-tab="list">Posts</div>
+          <div class="admin-tab" data-tab="tags">Tags</div>
         </div>
 
         <!-- Lista de posts -->
@@ -468,8 +566,8 @@ function renderAdmin() {
                   <p>${formatDate(p.date)} · ${(p.tags || []).join(", ")} · ${p.published ? "Publicado" : "Rascunho"}</p>
                 </div>
                 <div class="admin-post-actions">
-                  <button class="btn btn-outline btn-sm" onclick="editPost('${escapeHtml(p.id)}')">Editar</button>
-                  <button class="btn btn-danger btn-sm" onclick="deletePost('${escapeHtml(p.id)}')">Excluir</button>
+                  <button class="btn btn-outline btn-sm" data-action="edit" data-id="${escapeHtml(p.id)}">Editar</button>
+                  <button class="btn btn-danger btn-sm" data-action="delete" data-id="${escapeHtml(p.id)}">Excluir</button>
                 </div>
               </div>
             `
@@ -522,7 +620,7 @@ function renderAdmin() {
             </div>
             <div style="display:flex; gap:0.75rem;">
               <button type="submit" class="btn btn-primary">Salvar post</button>
-              <button type="button" class="btn btn-outline" onclick="switchTab('list')">Cancelar</button>
+              <button type="button" class="btn btn-outline" id="btnCancelPost">Cancelar</button>
             </div>
           </form>
         </div>
@@ -531,15 +629,15 @@ function renderAdmin() {
         <div id="tab-tags" class="admin-tab-content">
           <div style="display:flex; gap:0.5rem; margin-bottom:1.5rem;">
             <input type="text" id="newTag" placeholder="Nova tag" />
-            <button class="btn btn-primary btn-sm" onclick="addTag()">Adicionar</button>
+            <button class="btn btn-primary btn-sm" id="btnAddTag">Adicionar</button>
           </div>
-          <div style="display:flex; flex-wrap:wrap; gap:0.5rem;">
+          <div style="display:flex; flex-wrap:wrap; gap:0.5rem;" id="tagsList">
             ${tags
               .map(
                 (t) => `
               <span class="tag-chip">
                 ${escapeHtml(t)}
-                <button class="tag-remove" onclick="removeTag('${escapeHtml(t)}')">×</button>
+                <button class="tag-remove" data-tag="${escapeHtml(t)}">×</button>
               </span>
             `
               )
@@ -549,157 +647,151 @@ function renderAdmin() {
         </div>
       </div>
     </div>
-
-    <script>
-      function switchTab(tab) {
-        document.querySelectorAll('.admin-tab-content').forEach(el => el.classList.remove('active'));
-        document.querySelectorAll('.admin-tab').forEach(el => el.classList.remove('active'));
-        document.getElementById('tab-' + tab).classList.add('active');
-        document.querySelector('.admin-tab[onclick="switchTab(\'' + tab + '\')"]').classList.add('active');
-      }
-
-      document.getElementById('postDate').valueAsDate = new Date();
-    </script>
   `;
 
-  // Form de post
-  const form = document.getElementById("postForm");
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    savePostFromForm();
+  // === Event listeners programáticos (após injetar o HTML) ===
+
+  // Abas
+  document.querySelectorAll(".admin-tab[data-tab]").forEach((tab) => {
+    tab.addEventListener("click", function () {
+      window.switchTab(this.getAttribute("data-tab"));
+    });
   });
 
-  window.switchTab = switchTab;
-  window.editPost = function (id) {
-    const posts = getPosts();
-    const p = posts.find((x) => x.id === id);
-    if (!p) return;
-    document.getElementById("postId").value = p.id;
-    document.getElementById("postTitle").value = p.title;
-    document.getElementById("postExcerpt").value = p.excerpt || "";
-    document.getElementById("postImage").value = p.coverImage || "";
-    document.getElementById("postAuthor").value = p.author || "";
-    document.getElementById("postDate").value = p.date || "";
-    document.getElementById("postTags").value = (p.tags || []).join(", ");
-    document.getElementById("postContent").value = p.content || "";
-    document.getElementById("postFeatured").checked = !!p.featured;
-    document.getElementById("postPublished").checked = !!p.published;
-    switchTab("new");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  window.deletePost = function (id) {
-    if (!confirm("Tem certeza que deseja excluir este post?")) return;
-    let posts = getPosts();
-    posts = posts.filter((p) => p.id !== id);
-    savePosts(posts);
-    showToast("Post excluído com sucesso", "success");
-    renderAdmin();
-  };
-
-  window.addTag = function () {
-    const input = document.getElementById("newTag");
-    const t = input.value.trim();
-    if (!t) return;
-    let tags = getTags();
-    if (tags.includes(t)) {
-      showToast("Tag já existe", "info");
-      return;
-    }
-    tags.push(t);
-    saveTags(tags);
-    input.value = "";
-    showToast("Tag adicionada", "success");
-    renderAdmin();
-  };
-
-  window.removeTag = function (t) {
-    let tags = getTags();
-    tags = tags.filter((x) => x !== t);
-    // Remove tag de posts que a usam
-    let posts = getPosts();
-    posts = posts.map((p) => ({ ...p, tags: (p.tags || []).filter((x) => x !== t) }));
-    savePosts(posts);
-    saveTags(tags);
-    showToast("Tag removida", "success");
-    renderAdmin();
-  };
-
-  function savePostFromForm() {
-    const id = document.getElementById("postId").value;
-    const title = document.getElementById("postTitle").value.trim();
-    const excerpt = document.getElementById("postExcerpt").value.trim();
-    const image = document.getElementById("postImage").value.trim();
-    const author = document.getElementById("postAuthor").value.trim() || "Equipe Blog";
-    const date = document.getElementById("postDate").value || new Date().toISOString().split("T")[0];
-    const tagsRaw = document.getElementById("postTags").value;
-    const tags = tagsRaw.split(",").map((t) => t.trim()).filter(Boolean);
-    const content = document.getElementById("postContent").value.trim();
-    const featured = document.getElementById("postFeatured").checked;
-    const published = document.getElementById("postPublished").checked;
-
-    if (!title || !excerpt || !content) {
-      showToast("Preencha título, resumo e conteúdo", "error");
-      return;
-    }
-
-    let posts = getPosts();
-    const slug = slugify(title);
-    const existing = posts.find((p) => p.slug === slug && p.id !== id);
-    if (existing) {
-      showToast("Já existe um post com este título", "error");
-      return;
-    }
-
-    const post = {
-      id: id || Date.now().toString(),
-      title,
-      slug,
-      excerpt,
-      coverImage: image,
-      author,
-      date,
-      tags,
-      content,
-      featured,
-      published,
-    };
-
-    if (id) {
-      posts = posts.map((p) => (p.id === id ? post : p));
-      showToast("Post atualizado com sucesso", "success");
-    } else {
-      posts.unshift(post);
-      // Atualiza lista de tags com as novas usadas
-      let allTags = getTags();
-      tags.forEach((t) => {
-        if (!allTags.includes(t)) allTags.push(t);
-      });
-      saveTags(allTags);
-      showToast("Post criado com sucesso", "success");
-    }
-
-    savePosts(posts);
-    document.getElementById("postForm").reset();
-    document.getElementById("postId").value = "";
-    document.getElementById("postPublished").checked = true;
-    switchTab("list");
-    renderAdmin();
+  // Novo post
+  const btnNewPost = document.getElementById("btnNewPost");
+  if (btnNewPost) {
+    btnNewPost.addEventListener("click", () => {
+      // Limpa o formulário para novo post
+      document.getElementById("postForm").reset();
+      document.getElementById("postId").value = "";
+      document.getElementById("postPublished").checked = true;
+      window.switchTab("new");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
   }
 
-  window.logoutAdmin = function () {
-    sessionStorage.removeItem("blog_admin_logged");
-    showToast("Sessão encerrada", "info");
-    router.navigate("/admin.html");
-  };
+  // Cancelar
+  const btnCancelPost = document.getElementById("btnCancelPost");
+  if (btnCancelPost) {
+    btnCancelPost.addEventListener("click", () => {
+      window.switchTab("list");
+    });
+  }
+
+  // Editar / Excluir (delegation no container de posts)
+  const postsList = document.querySelector(".admin-posts-list");
+  if (postsList) {
+    postsList.addEventListener("click", (e) => {
+      const btn = e.target.closest("button[data-action]");
+      if (!btn) return;
+      const action = btn.getAttribute("data-action");
+      const id = btn.getAttribute("data-id");
+      if (action === "edit") {
+        window.editPost(id);
+      } else if (action === "delete") {
+        window.deletePost(id);
+      }
+    });
+  }
+
+  // Logout
+  const btnLogout = document.getElementById("btnLogoutAdmin");
+  if (btnLogout) {
+    btnLogout.addEventListener("click", window.logoutAdmin);
+  }
+
+  // Adicionar tag
+  const btnAddTag = document.getElementById("btnAddTag");
+  if (btnAddTag) {
+    btnAddTag.addEventListener("click", window.addTag);
+  }
+
+  // Remover tags (delegation)
+  const tagsList = document.getElementById("tagsList");
+  if (tagsList) {
+    tagsList.addEventListener("click", (e) => {
+      const btn = e.target.closest("button[data-tag]");
+      if (!btn) return;
+      window.removeTag(btn.getAttribute("data-tag"));
+    });
+  }
+
+  // Formulário de post
+  const form = document.getElementById("postForm");
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      savePostFromForm();
+    });
+  }
+
+  // Data padrão
+  const postDate = document.getElementById("postDate");
+  if (postDate) {
+    postDate.valueAsDate = new Date();
+  }
 }
 
-// ===== Helpers =====
-function escapeHtml(text) {
-  if (!text) return "";
-  const div = document.createElement("div");
-  div.textContent = text;
-  return div.innerHTML;
+function savePostFromForm() {
+  const id = document.getElementById("postId").value;
+  const title = document.getElementById("postTitle").value.trim();
+  const excerpt = document.getElementById("postExcerpt").value.trim();
+  const image = document.getElementById("postImage").value.trim();
+  const author = document.getElementById("postAuthor").value.trim() || "Equipe Blog";
+  const date = document.getElementById("postDate").value || new Date().toISOString().split("T")[0];
+  const tagsRaw = document.getElementById("postTags").value;
+  const tags = tagsRaw.split(",").map((t) => t.trim()).filter(Boolean);
+  const content = document.getElementById("postContent").value.trim();
+  const featured = document.getElementById("postFeatured").checked;
+  const published = document.getElementById("postPublished").checked;
+
+  if (!title || !excerpt || !content) {
+    showToast("Preencha título, resumo e conteúdo", "error");
+    return;
+  }
+
+  let posts = getPosts();
+  const slug = slugify(title);
+  const existing = posts.find((p) => p.slug === slug && p.id !== id);
+  if (existing) {
+    showToast("Jâ existe um post com este título", "error");
+    return;
+  }
+
+  const post = {
+    id: id || Date.now().toString(),
+    title,
+    slug,
+    excerpt,
+    coverImage: image,
+    author,
+    date,
+    tags,
+    content,
+    featured,
+    published,
+  };
+
+  if (id) {
+    posts = posts.map((p) => (p.id === id ? post : p));
+    showToast("Post atualizado com sucesso", "success");
+  } else {
+    posts.unshift(post);
+    let allTags = getTags();
+    tags.forEach((t) => {
+      if (!allTags.includes(t)) allTags.push(t);
+    });
+    saveTags(allTags);
+    showToast("Post criado com sucesso", "success");
+  }
+
+  savePosts(posts);
+  document.getElementById("postForm").reset();
+  document.getElementById("postId").value = "";
+  document.getElementById("postPublished").checked = true;
+  window.switchTab("list");
+  renderAdmin();
 }
 
 // ===== Boot =====
