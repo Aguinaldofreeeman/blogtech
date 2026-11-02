@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "name": "blog-moderno",
+  "routes": [
+    { "src": "/assets/(.*)", "headers": { "cache-control": "s-maxage=31536000, immutable" } },
+    { "src": "/style.css", "headers": { "cache-control": "s-maxage=31536000, immutable" } },
+    { "src": "/app.js", "headers": { "cache-control": "s-maxage=31536000, immutable" } },
+    { "src": "/admin.html", "dest": "/admin.html" },
+    { "src": "/post.html", "dest": "/post.html" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
+}
